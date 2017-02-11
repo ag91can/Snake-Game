@@ -25,7 +25,7 @@ public class Snake {
         this.elongate = false;
         xDir = 0;
         yDir = 0;
-        for (int i = 0; i == 20; i++) {
+        for (int i = 0; i < 21; i++) {
             snakePoints.add(new Point(200 + i * 4, 150));
         }
     }
@@ -63,6 +63,13 @@ public class Snake {
             if (this.x == snakePoints.get(i).getX() && this.y == snakePoints.get(i).getY()) {
                 return true;
             }
+        }
+        return false;
+    }
+
+    public boolean wallCollision() {
+        if (this.x >= 396 || this.x <= 0 || this.y >= 396|| this.y <= 0) {
+            return true;
         }
         return false;
     }

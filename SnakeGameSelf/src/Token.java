@@ -13,9 +13,10 @@ import java.awt.Graphics;
  */
 public class Token {
 
-    int x, y;
+    int x, y, score;
     Snake s;
     Boolean snakeCollision = false;
+    
 
     public Token(Snake s) {
         this.s = s;
@@ -37,13 +38,13 @@ public class Token {
         this.y = (int) (Math.random() * 395);
     }
 
-    public boolean checkCollisionWithToken() {
+    public void checkCollisionWithToken() {
 
-        if (s.getX() >= this.x - 1 || s.getX() <= this.x + 5) {
+        if (s.getX() >= this.x && s.getX() <= this.x + 5) {
             if (s.getY() >= this.y - 1 || s.getY() <= this.y + 5) {
                 s.setElongate(true);
                 randomizePosition();
-                
+                score ++;
             }
         }
     }

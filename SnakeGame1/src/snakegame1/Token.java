@@ -37,7 +37,7 @@ public class Token {
         y = (int) (Math.random() * 395);
     }
 
-    public boolean snakeCollision() {
+    public void snakeCollision() {
         int snakeX = snake.getX();
         int snakeY = snake.getY();
         if (snakeX >= x - 1 && snakeX <= (x + 6)) {
@@ -48,10 +48,8 @@ public class Token {
                 if (score < 21) {
                     snake.increaseSnakeSpeed();
                 }
-                return true;
 
             }
         }
-        return false;
     }
 }
