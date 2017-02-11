@@ -16,7 +16,6 @@ public class Token {
     int x, y, score;
     Snake s;
     Boolean snakeCollision = false;
-    
 
     public Token(Snake s) {
         this.s = s;
@@ -26,10 +25,8 @@ public class Token {
 
     public void draw(Graphics g) {
 
-        if (!snakeCollision) {
-            g.setColor(Color.green);
-            g.fillRect(x, y, 5, 5);
-        }
+        g.setColor(Color.green);
+        g.fillRect(x, y, 5, 5);
 
     }
 
@@ -39,14 +36,20 @@ public class Token {
     }
 
     public void checkCollisionWithToken() {
-
-        if (s.getX() >= this.x && s.getX() <= this.x + 5) {
-            if (s.getY() >= this.y - 1 || s.getY() <= this.y + 5) {
+        int snakeX = s.getX();
+        int snakeY = s.getY();
+        
+        if (snakeX >= this.x -1 && snakeX <= this.x + 5) {
+            if (snakeY >= this.y - 1 && snakeY <= this.y + 5) {
                 s.setElongate(true);
                 randomizePosition();
-                score ++;
+                score++;
             }
         }
+    }
+
+    public int getScore() {
+        return score;
     }
 
 }

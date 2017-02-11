@@ -109,6 +109,7 @@ public class SnakeGame extends Applet implements Runnable, KeyListener {
                 snake.setIsMoving(true);
             }
         }
+        
         if (e.getKeyCode() == KeyEvent.VK_UP) {
             if (snake.getYDir() != 1) {
                 snake.setYDir(-1);

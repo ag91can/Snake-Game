@@ -17,7 +17,7 @@ public class Snake {
 
     Graphics g;
     List<Point> snakePoints;
-    Boolean elongate;
+    Boolean elongate, isMoving;
     int xDir, yDir, x, y;
 
     public Snake() {
@@ -25,9 +25,10 @@ public class Snake {
         this.elongate = false;
         xDir = 0;
         yDir = 0;
-        for (int i = 0; i < 21; i++) {
+        for (int i = 20; i >= 0; i--) {
             snakePoints.add(new Point(200 + i * 4, 150));
         }
+        isMoving = false;
     }
 
     public void draw(Graphics g) {
@@ -39,17 +40,19 @@ public class Snake {
 
     public void move() {
 
-        Point tempFirstPoint = snakePoints.get(0);
-        Point lastPoint = snakePoints.get(snakePoints.size() - 1);
+        if (isMoving) {
+            Point tempFirstPoint = snakePoints.get(0);
+            Point lastPoint = snakePoints.get(snakePoints.size() - 1);
+
+            for (int i = snakePoints.size() - 1; i >= 1; i--) {
+                snakePoints.set(i, snakePoints.get(i - 1));
+            }
         snakePoints.set(0, new Point(tempFirstPoint.getX() + xDir * 4, tempFirstPoint.getY() + yDir * 4));
-
-        for (int i = snakePoints.size() - 1; i == 1; i--) {
-            snakePoints.set(i, snakePoints.get(i - 1));
-        }
-
-        if (elongate) {
-            snakePoints.add(lastPoint);
-            this.elongate = false;
+        
+            if (elongate) {
+                snakePoints.add(lastPoint);
+                this.elongate = false;
+            }
         }
 
     }
@@ -59,8 +62,8 @@ public class Snake {
     }
 
     public boolean snakeCollision() {
-        for (int i = 1; i < snakePoints.size(); i++) {
-            if (this.x == snakePoints.get(i).getX() && this.y == snakePoints.get(i).getY()) {
+        for (int i = 1; i < snakePoints.size() - 1; i++) {
+            if (this.getX() == snakePoints.get(i).getX() && this.getY() == snakePoints.get(i).getY()) {
                 return true;
             }
         }
@@ -68,18 +71,19 @@ public class Snake {
     }
 
     public boolean wallCollision() {
-        if (this.x >= 396 || this.x <= 0 || this.y >= 396|| this.y <= 0) {
+        if (this.getX() >= 396 || this.getX() < 0 || this.getY() >= 396 || this.getY() < 0) {
             return true;
         }
+
         return false;
     }
 
     public int getX() {
-        return this.x;
+        return this.snakePoints.get(0).getX();
     }
 
     public int getY() {
-        return this.y;
+        return this.snakePoints.get(0).getY();
     }
 
     public int getXDir() {
@@ -96,5 +100,13 @@ public class Snake {
 
     public void setYDir(int y) {
         this.yDir = y;
+    }
+
+    public void setIsMoving(boolean b) {
+        this.isMoving = b;
+    }
+
+    public boolean getIsMoving() {
+        return this.isMoving;
     }
 }

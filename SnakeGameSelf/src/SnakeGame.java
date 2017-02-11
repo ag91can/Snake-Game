@@ -31,18 +31,22 @@ public class SnakeGame extends Applet implements Runnable, KeyListener {
         snake = new Snake();
         thread = new Thread(this);
         token = new Token(snake);
-        thread.start();
         gameOver = false;
+        this.addKeyListener(this);
+        thread.start();
     }
 
     public void run() {
         for (;;) {
+
             if (!gameOver) {
                 this.checkGameOver();
                 token.checkCollisionWithToken();
                 snake.move();
             }
+
             this.repaint();
+
             try {
                 Thread.sleep(40);
             } catch (InterruptedException ex) {
@@ -59,17 +63,27 @@ public class SnakeGame extends Applet implements Runnable, KeyListener {
             snake.draw(gfx);
             token.draw(gfx);
         } else {
-            //code here to get the game over screen
+            gfx.setColor(Color.RED);
+            gfx.drawString("Game Over", 190, 180);
+            gfx.drawString("Score: " + token.getScore(), 190, 170);
         }
 
         g.drawImage(img, 0, 0, null);
+    }
+
+    public void update(Graphics g) {
+        paint(g);
+    }
+
+    public void reprint(Graphics g) {
+        paint(g);
     }
 
     public void checkGameOver() {
         if (snake.snakeCollision() || snake.wallCollision()) {
             this.gameOver = true;
         }
-        this.gameOver = false;
+
     }
 
     public void keyTyped(KeyEvent e) {
@@ -81,7 +95,37 @@ public class SnakeGame extends Applet implements Runnable, KeyListener {
     }
 
     public void keyReleased(KeyEvent e) {
+        if (!snake.getIsMoving()) {
+            if (e.getKeyCode() == KeyEvent.VK_UP || e.getKeyCode() == KeyEvent.VK_DOWN
+                    || e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                snake.setIsMoving(true);
+            }
+        }
+
+        if (e.getKeyCode() == KeyEvent.VK_UP) {
+            if (snake.getYDir() != 1) {
+                snake.setYDir(-1);
+                snake.setXDir(0);
+            }
+        }
+        if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+            if (snake.getYDir() != -1) {
+                snake.setYDir(1);
+                snake.setXDir(0);
+            }
+        }
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            if (snake.getXDir() != 1) {
+                snake.setYDir(0);
+                snake.setXDir(-1);
+            }
+        }
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            if (snake.getXDir() != -1) {
+                snake.setYDir(0);
+                snake.setXDir(1);
+            }
+        }
 
     }
-
 }
