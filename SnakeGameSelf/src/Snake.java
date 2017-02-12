@@ -14,8 +14,9 @@ import java.util.List;
  * @author e15
  */
 public class Snake {
-
+//bobs your uncle
     Graphics g;
+    Boolean Testing;
     List<Point> snakePoints;
     Boolean elongate, isMoving;
     int xDir, yDir, x, y;
