@@ -15,6 +15,8 @@ import java.util.List;
  */
 public class Snake {
 //bobs your uncle
+    //Testing again
+
     Graphics g;
     Boolean Testing;
     List<Point> snakePoints;
@@ -48,8 +50,8 @@ public class Snake {
             for (int i = snakePoints.size() - 1; i >= 1; i--) {
                 snakePoints.set(i, snakePoints.get(i - 1));
             }
-        snakePoints.set(0, new Point(tempFirstPoint.getX() + xDir * 4, tempFirstPoint.getY() + yDir * 4));
-        
+            snakePoints.set(0, new Point(tempFirstPoint.getX() + xDir * 4, tempFirstPoint.getY() + yDir * 4));
+
             if (elongate) {
                 snakePoints.add(lastPoint);
                 this.elongate = false;
