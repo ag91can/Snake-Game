@@ -37,8 +37,9 @@ public class Snake {
     }
 
     public void draw(Graphics g) {
-        g.setColor(Color.white);
+        
         for (Point p : snakePoints) {
+            g.setColor(Color.white);
             g.fillRect(p.getX(), p.getY(), 4, 4);
         }
     }

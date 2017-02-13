@@ -41,8 +41,8 @@ public class Token {
         int snakeX = snake.getX();
         int snakeY = snake.getY();
         
-        if (snakeX >= x - 1 && snakeX <= (x + 6)) {
-            if (snakeY >= y - 1 && snakeY <= (y + 6)) {
+        if (snakeX >= x - 6 && snakeX <= (x + 6)) {
+            if (snakeY >= y - 6 && snakeY <= (y + 6)) {
                 changePosition();
                 snake.setElongate(true);
                 score++;
